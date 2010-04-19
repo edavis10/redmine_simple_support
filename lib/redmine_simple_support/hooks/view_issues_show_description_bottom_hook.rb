@@ -18,11 +18,13 @@ module RedmineSimpleSupport
 
         if context[:issue].support_urls.present?
           items = context[:issue].support_urls_as_list.inject('') do |list, support_url|
-            list << content_tag(:li, link_to(support_url.text, support_url.url))
+            list << content_tag(:tr,
+                                content_tag(:td,
+                                            link_to(support_url.text, support_url.url)))
             list
           end
           
-          inner_section << content_tag(:ul, items)
+          inner_section << content_tag(:table, items, :style => 'width: 100%')
         end
         
         html << content_tag(:div, inner_section, :class => 'support-urls')

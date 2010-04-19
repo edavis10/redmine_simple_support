@@ -49,16 +49,16 @@ class RedmineSimpleSupport::Hooks::ViewIssuesShowDescriptionBottomTest < ActionC
                                 "https://support.example.com/ticket/123 https://support.example.com/ticket/968")
       end
 
-      should "show a list of the raw urls as links" do
+      should "list of the raw urls as links" do
         @response.body = hook(:issue => @issue)
 
-        assert_select 'ul' do
-          assert_select 'li a[href=?]', 'https://support.example.com/ticket/123', :text => 'https://support.example.com/ticket/123'
-          assert_select 'li a[href=?]', 'https://support.example.com/ticket/968', :text => 'https://support.example.com/ticket/968'
+        assert_select 'table' do
+          assert_select 'td a[href=?]', 'https://support.example.com/ticket/123', :text => 'https://support.example.com/ticket/123'
+          assert_select 'td a[href=?]', 'https://support.example.com/ticket/968', :text => 'https://support.example.com/ticket/968'
         end
       end
       
-      should_eventually "show a list of the valid support ids as links" do
+      should_eventually "list of the valid support ids as links" do
         @response.body = hook(:issue => @issue)
 
         assert_select 'ul' do
