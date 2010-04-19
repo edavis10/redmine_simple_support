@@ -12,4 +12,11 @@ Redmine::Plugin.register :redmine_simple_support do
   requires_redmine :version_or_higher => '0.9.2'
 end
 require 'redmine_simple_support/hooks/view_issues_form_details_bottom_hook'
+require 'redmine_simple_support/hooks/view_issues_show_description_bottom_hook'
 
+require 'dispatcher'
+Dispatcher.to_prepare :redmine_simple_support do
+
+  require_dependency 'issue'
+  Issue.send(:include, RedmineSimpleSupport::Patches::IssuePatch)
+end
