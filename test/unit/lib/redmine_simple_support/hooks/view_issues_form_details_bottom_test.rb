@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../../../test_helper'
 
-class RedmineSimpleSupport::HooksTest < ActionController::TestCase
+class RedmineSimpleSupport::Hooks::ViewIssuesFormDetailsBottomHookTest < ActionController::TestCase
   include Redmine::Hook::Helper
 
   def controller
