@@ -9,5 +9,5 @@ Redmine::Plugin.register :redmine_simple_support do
 
   version '0.1.0'
 
-  requires_redmine :version => '0.9.2'
+  requires_redmine :version_or_higher => '0.9.2'
 end
