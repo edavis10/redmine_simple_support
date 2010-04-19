@@ -11,4 +11,5 @@ Redmine::Plugin.register :redmine_simple_support do
 
   requires_redmine :version_or_higher => '0.9.2'
 end
-require 'redmine_simple_support/hooks/view_issues_form_details_bottom'
+require 'redmine_simple_support/hooks/view_issues_form_details_bottom_hook'
+
