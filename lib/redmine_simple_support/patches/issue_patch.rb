@@ -28,8 +28,16 @@ module RedmineSimpleSupport
             Struct.new("SupportUrl", :text, :url)
           end
 
-          urls.inject([]) do |links, link|
-            links << Struct::SupportUrl.new(link, link)
+          urls.inject([]) do |links, text|
+            if text.match(/#/) &&
+                Setting.plugin_redmine_simple_support &&
+                Setting.plugin_redmine_simple_support['base_url'].present?
+
+              link = Setting.plugin_redmine_simple_support['base_url'].gsub('{id}', text.gsub('#',''))
+            else
+              link = text # Full url used
+            end
+            links << Struct::SupportUrl.new(text, link)
             links
           end
 
