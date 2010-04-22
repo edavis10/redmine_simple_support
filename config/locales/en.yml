@@ -4,3 +4,4 @@ en:
   simple_support_label_base_url: Base url
   simple_support_text_settings_help: "Enter the base url to use for support urls.  Any {id} will be replaced with the id that's entered into the issue."
   simple_support_text_settings_base_url_example: "http://support.example.com/tickets/{id} will convert #123 into http://support.example.com/tickets/123"
+  simple_support_text_external_support_link: "External support {{content}}"

@@ -20,7 +20,7 @@ module RedmineSimpleSupport
           items = context[:issue].support_urls_as_list.inject('') do |list, support_url|
             list << content_tag(:tr,
                                 content_tag(:td,
-                                            link_to(support_url.text, support_url.url)))
+                                            link_to(support_url.text, support_url.url, :title => l(:simple_support_text_external_support_link, :content => support_url.text))))
             list
           end
           
