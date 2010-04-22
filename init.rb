@@ -13,6 +13,7 @@ Redmine::Plugin.register :redmine_simple_support do
 end
 require 'redmine_simple_support/hooks/view_issues_form_details_bottom_hook'
 require 'redmine_simple_support/hooks/view_issues_show_description_bottom_hook'
+require 'redmine_simple_support/hooks/controller_issues_edit_before_save_hook'
 
 require 'dispatcher'
 Dispatcher.to_prepare :redmine_simple_support do
@@ -20,3 +21,4 @@ Dispatcher.to_prepare :redmine_simple_support do
   require_dependency 'issue'
   Issue.send(:include, RedmineSimpleSupport::Patches::IssuePatch)
 end
+
