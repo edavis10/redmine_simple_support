@@ -10,6 +10,13 @@ Redmine::Plugin.register :redmine_simple_support do
   version '0.1.0'
 
   requires_redmine :version_or_higher => '0.9.2'
+
+  settings({
+             :partial => 'settings/redmine_simple_support',
+             :default => {
+               'base_url' => nil
+             }
+           })
 end
 require 'redmine_simple_support/hooks/view_issues_form_details_bottom_hook'
 require 'redmine_simple_support/hooks/view_issues_show_description_bottom_hook'
