@@ -14,6 +14,14 @@ module RedmineSimpleSupport
       end
 
       module InstanceMethods
+        def support_urls=(v)
+          # Also set @issue_before_change's support urls so
+          # #create_journal don't see the changes, thus preventing the
+          # support_url changes from being logged. (Data exposure)
+          @issue_before_change.support_urls = v if @issue_before_change
+          self.write_attribute(:support_urls, v)
+        end
+
         def support_urls_as_list
           return [] if support_urls.blank?
 

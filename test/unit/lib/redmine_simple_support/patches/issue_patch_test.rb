@@ -75,4 +75,25 @@ class RedmineSimpleSupport::Patches::IssueTest < ActionController::TestCase
       end
     end
   end
+
+  context "Issue saving with suport_urls" do
+    setup do
+      setup_plugin_configuration
+      @user = User.generate!
+      @project = Project.generate!
+      @issue = Issue.generate_for_project!(@project)
+      @issue.init_journal(@user)
+    end
+
+    should "not add any Journal Details about the support urls" do
+      @issue.subject = "Another change"
+      @issue.support_urls = "#123"
+      assert @issue.save
+
+      last_journal = @issue.journals.last
+
+      assert last_journal.details
+      assert last_journal.details.select {|detail| detail.prop_key == "support_urls"}.empty?, "Journal Details for support_urls found"
+    end
+  end
 end
