@@ -12,6 +12,9 @@ module RedmineSimpleSupport
       
       # * issue
       def view_issues_show_description_bottom(context={})
+        return '' if context[:issue].project.nil?
+        return '' unless User.current.allowed_to?(:view_support_urls, context[:issue].project)
+
         html = '<hr />'
         inner_section = ''
         inner_section << content_tag(:p, content_tag(:strong, l(:field_support_urls)))

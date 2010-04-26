@@ -17,10 +17,23 @@ class RedmineSimpleSupport::Hooks::ViewIssuesShowDescriptionBottomTest < ActionC
     call_hook :view_issues_show_description_bottom, args
   end
 
-  context "#view_issues_show_description_bottom" do
+  context "#view_issues_show_description_bottom for a user without permission" do
     setup do
       @project = Project.generate!
       @issue = Issue.generate_for_project!(@project)
+      User.current = nil
+    end
+
+    should "return an empty string" do
+      assert hook(:issue => @issue).blank?, "Non blank response returned."
+    end
+  end
+
+  context "#view_issues_show_description_bottom for a user with permission" do
+    setup do
+      @project = Project.generate!
+      @issue = Issue.generate_for_project!(@project)
+      User.current = @user = User.generate!(:login => 'existing', :password => 'existing', :password_confirmation => 'existing', :admin => true)
     end
     
     should "return an hr" do
