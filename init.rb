@@ -30,7 +30,11 @@ require 'redmine_simple_support/hooks/controller_issues_edit_before_save_hook'
 require 'dispatcher'
 Dispatcher.to_prepare :redmine_simple_support do
 
+  require_dependency 'query'
+  unless Query.included_modules.include?(RedmineSimpleSupport::Patches::QueryPatch)
+    Query.send(:include, RedmineSimpleSupport::Patches::QueryPatch)
+  end
+
   require_dependency 'issue'
   Issue.send(:include, RedmineSimpleSupport::Patches::IssuePatch)
 end
-
