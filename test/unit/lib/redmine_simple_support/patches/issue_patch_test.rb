@@ -6,6 +6,7 @@ class RedmineSimpleSupport::Patches::IssueTest < ActionController::TestCase
       setup_plugin_configuration
       @project = Project.generate!
       @issue = Issue.generate_for_project!(@project)
+      User.current = @user = User.generate!(:admin => true)
     end
     
     context "when empty" do
@@ -94,6 +95,35 @@ class RedmineSimpleSupport::Patches::IssueTest < ActionController::TestCase
 
       assert last_journal.details
       assert last_journal.details.select {|detail| detail.prop_key == "support_urls"}.empty?, "Journal Details for support_urls found"
+    end
+  end
+
+  context "Issue#support_urls" do
+    setup do
+      setup_plugin_configuration
+      @user = User.generate!
+      @project = Project.generate!
+      @issue = Issue.generate_for_project!(@project, :support_urls => '#123')
+    end
+    
+    should 'be hidden from users without permission to view' do
+      User.current = @user
+
+      assert_equal nil, @issue.support_urls
+    end
+
+    should 'be shown to users with permission to view' do
+      @role = Role.generate!(:permissions => [:view_support_urls, :view_issues])
+      Member.generate!(:principal => @user, :roles => [@role], :project => @project)
+
+      assert_equal '#123', @issue.support_urls
+    end
+
+    should 'be shown to admins' do
+      @user.update_attribute(:admin, true)
+      User.current = @user
+
+      assert_equal '#123', @issue.support_urls
     end
   end
 end

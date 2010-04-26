@@ -14,6 +14,14 @@ module RedmineSimpleSupport
       end
 
       module InstanceMethods
+        def support_urls
+          if User.current.allowed_to?(:view_support_urls, project)
+            self.read_attribute(:support_urls)
+          else
+            nil
+          end
+        end
+        
         def support_urls=(v)
           # Also set @issue_before_change's support urls so
           # #create_journal don't see the changes, thus preventing the
