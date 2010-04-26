@@ -20,6 +20,7 @@ Redmine::Plugin.register :redmine_simple_support do
 
   project_module :simple_support do
     permission :view_support_urls, {}
+    permission :edit_support_urls, {}
   end
 end
 require 'redmine_simple_support/hooks/view_issues_form_details_bottom_hook'

@@ -6,7 +6,7 @@ module RedmineSimpleSupport
       # * time_entry
       # * journal
       def controller_issues_edit_before_save(context={})
-        if context[:params] && context[:params][:issue] && context[:params][:issue][:support_urls]
+        if context[:params] && context[:params][:issue] && context[:params][:issue][:support_urls] && User.current.allowed_to?(:edit_support_urls, context[:issue].project)
           context[:issue].support_urls = context[:params][:issue][:support_urls]
         end
         return ''
