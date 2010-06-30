@@ -4,12 +4,14 @@ Allows linking Redmine issues to external resources like a third party bug track
 
 == Features
 
-TODO: fill in features
+* Enter multiple support urls on each issue
+* Basic text substitution for support ticket ids (https://projects.littlestreamsoftware.com/issues/3902)
+* Issue filter for searching for support urls on the issues list
+* Permissions to control viewing or editing support urls
 
 == Getting the plugin
 
 A copy of the plugin can be downloaded from {Little Stream Software}[https://projects.littlestreamsoftware.com/projects/redmine-simple-sup/files] or from {GitHub}[http://github.com/edavis10/redmine_simple_support]
-
 
 == Installation and Setup
 
