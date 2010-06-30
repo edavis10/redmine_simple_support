@@ -1,6 +1,6 @@
 = redmine_simple_support
 
-Allows linking Redmine issues to external resources like a third party bug tracker to support system.
+Allows linking Redmine issues to external resources like a third party bug tracker or support system.
 
 == Features
 
