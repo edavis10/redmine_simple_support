@@ -8,6 +8,17 @@ module RedmineSimpleSupport
         base.class_eval do
           unloadable
 
+          class << self
+            # Redmine 0.9 compatibility patches
+            def available_columns=(v)
+              self.available_columns = (v)
+            end unless respond_to?(:available_columns=)
+
+            def add_available_column(column)
+              self.available_columns << (column) if column.is_a?(QueryColumn)
+            end unless respond_to?(:add_available_column)
+          end
+
           Query.add_available_column(QueryColumn.new(:support_urls,
                                                      :sortable => "#{Issue.table_name}.support_urls"))
 
