@@ -7,7 +7,7 @@ Redmine::Plugin.register :redmine_simple_support do
   url 'https://projects.littlestreamsoftware.com/projects/redmine-simple-sup'
   author_url 'http://www.littlestreamsoftware.com'
 
-  version '0.1.0'
+  version '0.1.1'
 
   requires_redmine :version_or_higher => '0.9.2'
 
