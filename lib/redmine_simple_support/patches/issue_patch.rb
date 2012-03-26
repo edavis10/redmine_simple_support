@@ -7,6 +7,10 @@ module RedmineSimpleSupport
         base.send(:include, InstanceMethods)
         base.class_eval do
           unloadable
+
+          journal_options_excluding_support_urls = self.vestal_journals_options.dup
+          journal_options_excluding_support_urls[:except] << "support_urls"
+          self.vestal_journals_options = journal_options_excluding_support_urls
         end
       end
 

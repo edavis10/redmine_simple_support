@@ -94,7 +94,7 @@ class RedmineSimpleSupport::Patches::IssueTest < ActionController::TestCase
       last_journal = @issue.journals.last
 
       assert last_journal.details
-      assert last_journal.details.select {|detail| detail.prop_key == "support_urls"}.empty?, "Journal Details for support_urls found"
+      assert !last_journal.changes["support_urls"].present?
     end
   end
 
