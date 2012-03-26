@@ -11,6 +11,8 @@ module RedmineSimpleSupport
           journal_options_excluding_support_urls = self.vestal_journals_options.dup
           journal_options_excluding_support_urls[:except] << "support_urls"
           self.vestal_journals_options = journal_options_excluding_support_urls
+
+          safe_attributes "support_urls" if lambda {|issue, user| user.allowed_to?(:edit_support_urls, issue.project) }
         end
       end
 
